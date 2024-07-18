@@ -21,11 +21,10 @@ The course covers:
 -->
 - **Scripts**: Contains Python scripts for data preprocessing, model training, and evaluation.
 
-
+<!-- 
 ## Getting Started
 
 ### Prerequisites
-<!-- 
 - Python 3.8 or higher
   
 - TensorFlow / PyTorch
@@ -76,8 +75,5 @@ The course covers:
 5. Open a pull request.
 -->
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
