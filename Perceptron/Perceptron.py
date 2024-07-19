@@ -10,6 +10,7 @@ bias=int(input("Enter the bias:"))
 lrate=float(input("Enter the learning rate:"))  
 epochs=int(input("Enter the number of epochs:"))
 out=[]
+print("Enter the outputs:")
 for i in range(n//2):  
     out.append(int(input()))
 
