@@ -1,5 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 # Activation Functions
 def step_function(x):
@@ -31,8 +32,6 @@ def swish(x):
 
 def softsign(x):
     return x / (1 + np.abs(x))
-
-
 
 # Derivative Functions
 def step_function_derivative(x):
@@ -67,11 +66,7 @@ def swish_derivative(x):
 def softsign_derivative(x):
     return 1 / (1 + np.abs(x))**2
 
-
-
-
 x_values = np.linspace(-10, 10, 400)
-
 
 # Apply functions and compute derivatives
 def apply_functions(x):
@@ -105,28 +100,33 @@ def compute_derivatives(x):
 activation_outputs = apply_functions(x_values)
 activation_derivatives = compute_derivatives(x_values)
 
-
-
-def plot_in_batches(data_dict, title_prefix, batch_size=4):
-    num_plots = len(data_dict)
-    for start in range(0, num_plots, batch_size):
-        end = min(start + batch_size, num_plots)
-        batch_names = list(data_dict.keys())[start:end]
+# Create subplots with overlapping activation functions and derivatives
+def plot_activation_and_derivative(activation_outputs, activation_derivatives):
+    names = list(activation_outputs.keys())
+    num_plots = len(names)
+    
+    for i in range(num_plots):
+        fig = go.Figure()
         
-        fig, axs = plt.subplots(len(batch_names), 1, figsize=(10, 10))
-        if len(batch_names) == 1:
-            axs = [axs]
+        # Plot activation function
+        fig.add_trace(
+            go.Scatter(x=x_values, y=activation_outputs[names[i]], mode='lines', name=f'{names[i]} Function', line=dict(color='blue'))
+        )
         
-        for i, name in enumerate(batch_names):
-            axs[i].plot(x_values, data_dict[name])
-            axs[i].set_title(f'{title_prefix} - {name}')
-            axs[i].grid(True)
+        # Plot derivative
+        fig.add_trace(
+            go.Scatter(x=x_values, y=activation_derivatives[names[i]], mode='lines', name=f'{names[i]} Derivative', line=dict(color='red', dash='dash', width=4))
+        )
         
-        plt.tight_layout()
-        plt.show()
+        fig.update_layout(
+            title=f'{names[i]} Function and Derivative',
+            xaxis_title='x',
+            yaxis_title='y',
+            legend_title='Legend',
+            showlegend=True
+        )
+        
+        fig.show()
 
-# Plot activation functions in batches of 4
-plot_in_batches(activation_outputs, 'Activation Function')
-
-# Plot derivatives in batches of 4
-plot_in_batches(activation_derivatives, 'Derivative')
+# Plot activation functions and their derivatives
+plot_activation_and_derivative(activation_outputs, activation_derivatives)
