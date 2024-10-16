@@ -1,10 +1,12 @@
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from tensorflow import keras
-from tensorflow.keras import layers
+from tensorflow.keras import layers # ignore
 
 # Step 1: Generate a synthetic dataset
 X, y = make_classification(
